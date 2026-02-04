@@ -52,3 +52,22 @@ document.getElementById('magicButton').addEventListener('click', async () => {
         console.error(error);
     }
 });
+
+const copyBtn = document.getElementById('copyButton');
+
+copyBtn.addEventListener('click', () => {
+    const textToCopy = document.querySelector('.verb-box').innerText;
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = copyBtn.innerText;
+        copyBtn.innerText = "✅ Copied!";
+        copyBtn.style.backgroundColor = "#27ae60";
+
+        setTimeout(() =>{
+            copyBtn.innerText = originalText;
+            copyBtn.style.backgroundColor = "#3498db";
+        }, 2000);
+    });
+});
+
+copyBtn.style.display = 'block';
