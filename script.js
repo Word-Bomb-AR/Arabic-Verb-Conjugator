@@ -1,4 +1,7 @@
-document.getElementById('magicButton').addEventListener('click', async () => {
+const magicButton = document.getElementById('magicButton');
+const copyContainer = document.getElementById('copyContainer');
+
+magicButton.addEventListener('click', async () => {
     console.log("Button was clicked!");
     const verbInput = document.getElementById('verbInput');
     const resultArea = document.getElementById('results');
@@ -9,7 +12,7 @@ document.getElementById('magicButton').addEventListener('click', async () => {
     resultArea.innerHTML = `<p>Getting conjugations for: ${verb}...</p>`;
 
     const url = `https://qutrub.arabeyes.org/api?verb=${encodeURIComponent(verb)}`;
-
+    
     try{
         const response = await fetch(url);
         const data = await response.json();
@@ -45,6 +48,8 @@ document.getElementById('magicButton').addEventListener('click', async () => {
 
         bigBox.innerHTML = Array.from(uniqueVerbs).join("<br>");
         resultArea.appendChild(bigBox);
+
+        copyContainer.style.display = 'flex';
     }
     catch(error)
     {
