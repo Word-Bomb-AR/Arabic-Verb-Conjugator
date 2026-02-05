@@ -1,10 +1,11 @@
 const magicButton = document.getElementById('magicButton');
 const copyContainer = document.getElementById('copyContainer');
+const copyBtn = document.getElementById('copyButton');
+const verbInput = document.getElementById('verbInput');
+const resultArea = document.getElementById('results');
 
 magicButton.addEventListener('click', async () => {
     console.log("Button was clicked!");
-    const verbInput = document.getElementById('verbInput');
-    const resultArea = document.getElementById('results');
 
     const verb = verbInput.value.trim();
     if(!verb) return;
@@ -25,31 +26,45 @@ magicButton.addEventListener('click', async () => {
         let uniqueVerbs = new Set();
         const tashkeelRegex = /[\u064B-\u0652]/g;
 
-        const grid = data.result;
-
-        for(let i=1; i<=14; i++)
+        if(data && data.result)
         {
-            const row = grid[i.toString()];
+            const grid = data.result;
+            uniqueVerbs.clear();
 
-            if(row)
+            for(let i=1; i<=14; i++)
             {
-                for(let j=1; j<=12; j++)
-                {
-                    const conjugation = row[j.toString()];
+                const row = grid[i.toString()];
 
-                    if(conjugation && conjugation.trim() !== "")
+                if(row)
+                {
+                    for(let j=1; j<=12; j++)
                     {
-                        let cleanWord = conjugation.replace(tashkeelRegex, "");
-                        uniqueVerbs.add(cleanWord);
+                        const conjugation = row[j.toString()];
+
+                        if(conjugation && conjugation.trim() !== "")
+                        {
+                            let cleanWord = conjugation.replace(tashkeelRegex, "");
+                            uniqueVerbs.add(cleanWord);
+                        }
                     }
                 }
             }
+
+            if(uniqueVerbs.size > 0)
+            {
+                bigBox.innerHTML = Array.from(uniqueVerbs).join("<br>");
+                resultArea.appendChild(bigBox);
+                copyContainer.style.display = 'flex';
+            }
+            else
+            {
+                showErrorState();
+            }
         }
-
-        bigBox.innerHTML = Array.from(uniqueVerbs).join("<br>");
-        resultArea.appendChild(bigBox);
-
-        copyContainer.style.display = 'flex';
+        else
+        {
+            showErrorState();
+        }
     }
     catch(error)
     {
@@ -58,7 +73,15 @@ magicButton.addEventListener('click', async () => {
     }
 });
 
-const copyBtn = document.getElementById('copyButton');
+function showErrorState()
+{
+    resultArea.innerHTML = `<div style="color: #e74c3c; margin-top: 20px; font-weight: bold;">
+                    ⚠️ That doesn't look like a valid verb. Please try again!
+                </div>`;
+    copyContainer.style.display = 'none';
+    resultArea.classList.add('shake');
+    setTimeout(() => resultArea.classList.remove('shake'), 300);
+}
 
 copyBtn.addEventListener('click', () => {
     const textToCopy = document.querySelector('.verb-box').innerText;
