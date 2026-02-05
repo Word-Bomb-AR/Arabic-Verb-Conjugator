@@ -73,6 +73,13 @@ magicButton.addEventListener('click', async () => {
     }
 });
 
+verbInput.addEventListener('keydown', (event) => {
+    if(event.key === 'Enter')
+    {
+        magicButton.click();
+    }
+});
+
 function showErrorState()
 {
     resultArea.innerHTML = `<div style="color: #e74c3c; margin-top: 20px; font-weight: bold;">
@@ -82,13 +89,6 @@ function showErrorState()
     resultArea.classList.add('shake');
     setTimeout(() => resultArea.classList.remove('shake'), 300);
 }
-
-verbInput.addEventListener('keydown', (event) => {
-    if(event.key === 'Enter')
-    {
-        magicButton.click();
-    }
-});
 
 copyBtn.addEventListener('click', () => {
     const textToCopy = document.querySelector('.verb-box').innerText;

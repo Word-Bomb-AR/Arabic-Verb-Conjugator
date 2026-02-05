@@ -42,7 +42,7 @@ body{
 }
 
 #magicButton:hover{
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px) scale(1.02);
     box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4);
 }
 
@@ -122,6 +122,24 @@ input[type="text"]{
     outline: none;
     transition: border-color 0.3s;
     font-size: 16px;
+
+    direction: ltr;
+    text-align: left;
+    padding-left: 15px;
+}
+
+input[type="text"]:not(:placeholder-shown)
+{
+    direction: rtl;
+    text-align: right;
+    border-color: #764ba2;
+    background-color: #f8fafc;
+}
+
+input[type="text"]::placeholder{
+    color: #a0a0a0;
+    opacity: 1;
+    text-align: left;
 }
 
 input[type="text"]:focus
