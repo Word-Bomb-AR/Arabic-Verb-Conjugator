@@ -83,6 +83,13 @@ function showErrorState()
     setTimeout(() => resultArea.classList.remove('shake'), 300);
 }
 
+verbInput.addEventListener('keydown', (event) => {
+    if(event.key === 'Enter')
+    {
+        magicButton.click();
+    }
+});
+
 copyBtn.addEventListener('click', () => {
     const textToCopy = document.querySelector('.verb-box').innerText;
 

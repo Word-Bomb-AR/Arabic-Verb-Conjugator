@@ -11,6 +11,52 @@ body{
     margin: 0;
 }
 
+.search-box{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#verbInput{
+    flex: 1;
+    max-width: 300px;
+}
+
+#magicButton{
+    height: 45px;
+    white-space: nowrap;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+    outline: none;
+}
+
+#magicButton:hover{
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4);
+}
+
+#magicButton:active{
+    transform: translateY(0) scale(0.98);
+}
+
+.input-group{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
 #results{
     margin-top: 30px;
     display: flex; 
