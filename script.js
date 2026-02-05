@@ -5,12 +5,11 @@ const verbInput = document.getElementById('verbInput');
 const resultArea = document.getElementById('results');
 
 magicButton.addEventListener('click', async () => {
-    console.log("Button was clicked!");
-
     const verb = verbInput.value.trim();
     if(!verb) return;
 
-    resultArea.innerHTML = `<p>Getting conjugations for: ${verb}...</p>`;
+    copyContainer.style.display = 'none';
+    resultArea.innerHTML = '<div class="loader"></div>';
 
     const url = `https://qutrub.arabeyes.org/api?verb=${encodeURIComponent(verb)}`;
     
@@ -52,6 +51,7 @@ magicButton.addEventListener('click', async () => {
 
             if(uniqueVerbs.size > 0)
             {
+                bigBox.classList.add('result-animate');
                 bigBox.innerHTML = Array.from(uniqueVerbs).join("<br>");
                 resultArea.appendChild(bigBox);
                 copyContainer.style.display = 'flex';
